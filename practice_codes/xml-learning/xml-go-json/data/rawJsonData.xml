@@ -1,0 +1,18 @@
+<data>
+  <person>
+    <firstname>Rajesh</firstname>
+    <lastname>Kumar</lastname>
+    <address>
+      <city>Bangalore</city>
+      <state>Karnataka</state>
+    </address>
+  </person>
+  <person>
+    <firstname>Puja</firstname>
+    <lastname>Kumari</lastname>
+    <address>
+      <city>Kolkata</city>
+      <state>West Bengal</state>
+    </address>
+  </person>
+</data>

@@ -1,0 +1,10 @@
+sky
+cloud
+cup
+wood
+rock
+sea
+tree
+oil
+book
+falcon

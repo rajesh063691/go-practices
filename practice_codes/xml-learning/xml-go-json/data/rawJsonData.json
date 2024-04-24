@@ -1,0 +1,20 @@
+{
+  "people": [
+    {
+      "firstname": "Rajesh",
+      "lastname": "Kumar",
+      "address": {
+        "city": "Bangalore",
+        "state": "Karnataka"
+      }
+    },
+    {
+      "firstname": "Puja",
+      "lastname": "Kumari",
+      "address": {
+        "city": "Kolkata",
+        "state": "West Bengal"
+      }
+    }
+  ]
+}

@@ -1,0 +1,414 @@
+
+<====$group pipelines======>
+db.sales.insert(
+[
+{ "_id" : 1, "item" : "abc", "price" : 10, "quantity" : 2, "date" : ISODate("2014-01-01T08:00:00Z") },
+{ "_id" : 2, "item" : "jkl", "price" : 20, "quantity" : 1, "date" : ISODate("2014-02-03T09:00:00Z") },
+{ "_id" : 3, "item" : "xyz", "price" : 5, "quantity" : 5, "date" : ISODate("2014-02-03T09:05:00Z") },
+{ "_id" : 4, "item" : "abc", "price" : 10, "quantity" : 10, "date" : ISODate("2014-02-15T08:00:00Z") },
+{ "_id" : 5, "item" : "xyz", "price" : 5, "quantity" : 10, "date" : ISODate("2014-02-15T09:05:00Z") },
+{ "_id" : 6, "item" : "xyz", "price" : 5, "quantity" : 5, "date" : ISODate("2014-02-15T12:05:10Z") },
+{ "_id" : 7, "item" : "xyz", "price" : 5, "quantity" : 10, "date" : ISODate("2014-02-15T14:12:12Z") }
+])
+
+[{
+    $group: {
+        _id: "$item",
+        maxTotalAmount: {
+            $max: {
+                $multiply: ["$price", "$quantity"]
+            }
+        },
+        maxQuantity: {
+            $max: "$quantity"
+        },
+        maxUnitPrice: {
+            $max: "$price"
+        },
+    }
+}]
+
+
+[{
+    $group: {
+        _id: {
+            day: {
+                $dayOfYear: "$date"
+            },
+            year: {
+                $year: "$date"
+            }
+        },
+        itemsSold: {
+            $push: {
+                item: "$item",
+                quantity: "$quantity"
+            }
+        },
+        uniqueItemsSold: {
+            $addToSet: "$item"
+        }
+
+    }
+}]
+
+[{
+    $project: {
+        maxQuizes: {
+            $max: "$quizzes"
+        },
+        labMax: {
+            $max: "$labs"
+        },
+        examMax: {
+            $max: ["$final", "$midterm"]
+        }
+    }
+}]
+
+
+group by shows only one documnets but it does operation on multiple documents that matches the group by filter, means in backed it return multiple documents on which we perform sum of documents or average of some fields
+[{
+    $match: {
+        date: {
+            $gte: ISODate('2014-01-01'),
+            $lte: ISODate('2016-12-31')
+        }
+    }
+}, {
+    $group: {
+        _id: {
+            $dateToString: {
+                format: "%Y-%m-%d %H:00",
+                date: "$date"
+            }
+        },
+        totalSalesAmount: {
+            $sum: {
+                $multiply: ["$price", "$quantity"]
+            }
+        },
+        avgSales: {
+            $avg: "$quantity"
+        },
+        eachdaySalesCount: {
+            $sum: 1
+        }
+
+    }
+}, {
+    $sort: {
+        _id: 1,
+        totalSalesAmount: -1
+    }
+}]
+
+
+The following aggregation operation uses the $group stage to group the documents by the month, day, and year and calculates the total price and the average quantity as well as counts the documents per each group:
+[{
+    $group: {
+        _id: {
+            year: {
+                $year: "$date"
+            },
+            month: {
+                $month: "$date"
+            },
+            day: {
+                $dayOfMonth: "$date"
+            }
+        },
+        totalPrice: {
+            $sum: {
+                $multiply: ["$price", "$quantity"]
+            }
+        },
+        avgQuantity: {
+            $avg: "$quantity"
+        },
+        documentCount: {
+            $sum: 1
+        }
+
+    }
+}]
+
+Group by null
+[{
+    $group: {
+        _id: null,
+        totalPrice: {
+            $sum: {
+                $multiply: ["$price", "$quantity"]
+            }
+        },
+        avgQuantity: {
+            $avg: "$quantity"
+        },
+        documentCount: {
+            $sum: 1
+        }
+    }
+}]
+
+db.books.insert([
+{ "_id" : 8751, "title" : "The Banquet", "author" : "Dante", "copies" : 2 },
+{ "_id" : 8752, "title" : "Divine Comedy", "author" : "Dante", "copies" : 1 },
+{ "_id" : 8645, "title" : "Eclogues", "author" : "Dante", "copies" : 2 },
+{ "_id" : 7000, "title" : "The Odyssey", "author" : "Homer", "copies" : 10 },
+{ "_id" : 7020, "title" : "Iliad", "author" : "Homer", "copies" : 10 }
+])
+Group title by author
+[{
+    $group: {
+        _id: "$author",
+        books: {
+            $push: "$title"
+        },
+        totalBooks: {
+            $sum: 1
+        }
+
+    }
+}]
+
+Group Documents by author
+$$ROOT ==> it is used to push entire document 
+
+[{
+    $group: {
+        _id: "$author",
+        books: {
+            $push: "$$ROOT"
+        },
+        totalBooks: {
+            $sum: 1
+        },
+        totalCopiesSold: {
+            $sum: "$copies"
+        }
+
+    }
+}]
+
+db.inventory.insert([
+{ "_id" : 1, "item" : "ABC1", sizes: [ "S", "M", "L"] },
+{ "_id" : 2, "item" : "EFG", "sizes" : [ ] },
+{ "_id" : 3, "item" : "IJK", "sizes": "M" },
+{ "_id" : 4, "item" : "LMN" },
+{ "_id" : 5, "item" : "XYZ", "sizes" : null }
+])
+here arrayIndex will be added as new field in the collection
+
+[{
+    $unwind: {
+        path: "$sizes",
+        includeArrayIndex: "arrayIndex",
+        preserveNullAndEmptyArrays: true
+
+
+    }
+}]
+
+db.users.insert([
+{ "_id" : 1, "name" : "dave123", "q1" : true, "q2" : true },
+{ "_id" : 2, "name" : "dave2", "q1" : false, "q2" : false  },
+{ "_id" : 3, "name" : "ahn", "q1" : true, "q2" : true  },
+{ "_id" : 4, "name" : "li", "q1" : true, "q2" : false  },
+{ "_id" : 5, "name" : "annT", "q1" : false, "q2" : true  },
+{ "_id" : 6, "name" : "li", "q1" : true, "q2" : true  },
+{ "_id" : 7, "name" : "ty", "q1" : false, "q2" : true  }
+])
+
+
+db.artwork.insert([
+  { "_id" : 1, "title" : "The Pillars of Society", "artist" : "Grosz", "year" : 1926,
+    "price" : NumberDecimal("199.99") },
+{ "_id" : 2, "title" : "Melancholy III", "artist" : "Munch", "year" : 1902,
+    "price" : NumberDecimal("280.00") },
+{ "_id" : 3, "title" : "Dancer", "artist" : "Miro", "year" : 1925,
+    "price" : NumberDecimal("76.04") },
+{ "_id" : 4, "title" : "The Great Wave off Kanagawa", "artist" : "Hokusai",
+    "price" : NumberDecimal("167.30") },
+{ "_id" : 5, "title" : "The Persistence of Memory", "artist" : "Dali", "year" : 1931,
+    "price" : NumberDecimal("483.00") },
+{ "_id" : 6, "title" : "Composition VII", "artist" : "Kandinsky", "year" : 1913,
+    "price" : NumberDecimal("385.00") },
+{ "_id" : 7, "title" : "The Scream", "artist" : "Munch", "year" : 1893
+    /* No price*/ },
+{ "_id" : 8, "title" : "Blue Flower", "artist" : "O'Keefe", "year" : 1918,
+    "price" : NumberDecimal("118.42") }
+  ])
+
+default is used for datas coming outside the buckets range
+boundaries on price
+[{
+    $bucket: {
+        groupBy: "$price",
+        boundaries: [0, 200, 400],
+        default: "Others",
+        output: {
+            "count": {
+                $sum: 1
+            },
+            "titles": {
+                $push: "$title"
+            }
+        }
+    }
+}]
+
+boundaries on years
+[{
+    $bucket: {
+        groupBy: "$year",
+        boundaries: [1890, 1910, 1920, 1940],
+        default: "Unknown",
+        output: {
+            "count": {
+                $sum: 1
+            },
+            "artwork": {
+                $push: {
+                    "title": "$title",
+                    "year": "$year"
+                }
+            }
+        }
+    }
+
+}]
+
+db.scores.insert([
+  {
+  _id: 1,
+  student: "Maya",
+  homework: [ 10, 5, 10 ],
+  quiz: [ 10, 8 ],
+  extraCredit: 0
+},
+{
+  _id: 2,
+  student: "Ryan",
+  homework: [ 5, 6, 5 ],
+  quiz: [ 8, 8 ],
+  extraCredit: 8
+}
+  ])
+[{
+    $addFields: {
+        "totalHomework": {
+            $sum: "$homework"
+        },
+        "totalQuiz": {
+            $sum: "$quiz"
+        }
+    }
+}]
+
+
+
+db.vehicles.insert([
+  { _id: 1, type: "car", specs: { doors: 4, wheels: 4 } },
+{ _id: 2, type: "motorcycle", specs: { doors: 0, wheels: 2 } },
+{ _id: 3, type: "jet ski" }
+  ])
+
+  [{
+    $addFields: {
+        "specs.fuel_type": {
+            "unleaded"
+        }
+    }
+}]
+
+db.produce.insert([
+  {
+   "_id" : 1,
+   "fruit" : [ "apples", "oranges" ],
+   "in_stock" : { "oranges" : 20, "apples" : 60 },
+   "on_order" : { "oranges" : 35, "apples" : 75 }
+},
+{
+   "_id" : 2,
+   "vegetables" : [ "beets", "yams" ],
+   "in_stock" : { "beets" : 130, "yams" : 200 },
+   "on_order" : { "beets" : 90, "yams" : 145 }
+}
+  ])
+
+
+  [{
+    $replaceRoot: {
+        newRoot: {
+            in_stock: "$in_stock"
+        },
+    }
+}]
+
+
+db.people.insert([
+  { "_id" : 1, "name" : "Arlene", "age" : 34, "pets" : { "dogs" : 2, "cats" : 1 } },
+{ "_id" : 2, "name" : "Sam", "age" : 41, "pets" : { "cats" : 1, "hamsters" : 3 } },
+{ "_id" : 3, "name" : "Maria", "age" : 25 }
+  ])
+
+[{
+    $match: {
+        pets: {
+            $exists: true
+        }
+    }
+}, {
+    $replaceRoot: {
+        newRoot: {
+            "pets": "$pets"
+        }
+    }
+}]
+
+  db.contact.insert([
+  { "_id" : 1, "first_name" : "Gary", "last_name" : "Sheffield", "city" : "New York" },
+{ "_id" : 2, "first_name" : "Nancy", "last_name" : "Walker", "city" : "Anaheim" },
+{ "_id" : 3, "first_name" : "Peter", "last_name" : "Sumner", "city" : "Toledo" }
+  ])
+
+  [{
+    $replaceRoot: {
+        newRoot: {
+            full_name: {
+                $concat: ["$first_name", " ", "$last_name"]
+            }
+        }
+    }
+}]
+
+db.contacts.insert([
+  { "_id" : 1, "name" : "Susan",
+  "phones" : [ { "cell" : "555-653-6527" },
+               { "home" : "555-965-2454" } ] },
+{ "_id" : 2, "name" : "Mark",
+  "phones" : [ { "cell" : "555-445-8767" },
+               { "home" : "555-322-2774" } ] }
+  ])
+
+
+  [{
+    $unwind: {
+        path: "$phones",
+        preserveNullAndEmptyArrays: true
+    }
+}, {
+    $match: {
+        "phones.cell": {
+            $exists: true
+        }
+    }
+}, {
+    $replaceRoot: {
+        newRoot: {
+            "phone": "$phones"
+        }
+    }
+}]
+
