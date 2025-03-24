@@ -13,7 +13,6 @@ func mychannel(ch chan string) {
 	for i := 0; i < 4; i++ {
 		ch <- "Hello_" + strconv.Itoa(i)
 	}
-
 	close(ch)
 }
 

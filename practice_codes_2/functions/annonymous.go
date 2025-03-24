@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-func main() {
+func main_a() {
 	// var a = 10
 	// func() {
 	// 	fmt.Println("Hello")

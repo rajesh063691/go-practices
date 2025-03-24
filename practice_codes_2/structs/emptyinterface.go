@@ -31,7 +31,7 @@ func testType(a interface{}) (middlename, lastname string) {
 	return
 }
 
-func main() {
+func main_empty() {
 
 	mp := make(map[string]string)
 	mp["middlename"] = "Kumar"

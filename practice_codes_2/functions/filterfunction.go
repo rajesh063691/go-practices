@@ -18,13 +18,21 @@ func returnIfTeacher(u User) bool {
 
 func main_fil() {
 
-	u1 := User{"John Doe", "gardener", false}
-	u2 := User{"Richard Roe", "driver", true}
-	u3 := User{"Bob Martin", "teacher", true}
-	u4 := User{"Lucy Smith", "accountant", false}
-	u5 := User{"James Brown", "teacher", true}
+	// u1 := User{"John Doe", "gardener", false}
+	// u2 := User{"Richard Roe", "driver", true}
+	// u3 := User{"Bob Martin", "teacher", true}
+	// u4 := User{"Lucy Smith", "accountant", false}
+	// u5 := User{"James Brown", "teacher", true}
 
-	users := []User{u1, u2, u3, u4, u5}
+	// users := []User{u1, u2, u3, u4, u5}
+
+	users := []User{
+		{"John Doe", "gardener", false},
+		{"Richard Roe", "driver", true},
+		{"Bob Martin", "teacher", true},
+		{"Lucy Smith", "accountant", false},
+		{"James Brown", "teacher", true},
+	}
 
 	// annonymous way of calling
 	// //this is a annonymous function where definition is at the same place

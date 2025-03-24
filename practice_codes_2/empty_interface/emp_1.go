@@ -1,4 +1,5 @@
 package main
+
 func main_1() {
 	var i int8 = 1
 	read(i)

@@ -7,7 +7,7 @@ func main_pipe() {
 	naturals := make(chan int)
 	squarer := make(chan int)
 
-	// sends natural numbers to naturals chaneel
+	// sends natural numbers to naturals channel
 	go func() {
 		for i := 0; i < 10; i++ {
 			naturals <- i

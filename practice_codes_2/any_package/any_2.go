@@ -9,7 +9,7 @@ func printValue(value any) {
 	fmt.Printf("%T\n", value)
 }
 
-func main() {
+func main_2() {
 	printValue(42)
 	printValue("hello")
 	printValue(true)

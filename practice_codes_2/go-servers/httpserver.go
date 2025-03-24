@@ -33,7 +33,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
 
 // function to gives the list of teachers
@@ -50,6 +49,7 @@ func teachersHandler1(res http.ResponseWriter, req *http.Request) {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 	res.Write(data)
 	log.Printf("Response successfully sent for teachers =%+v \n", req)
 }

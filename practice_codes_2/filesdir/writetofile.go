@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 )
 
@@ -18,7 +18,7 @@ func main_wriet() {
 	path := filepath.Join(tmpDir2, "/welcome.txt")
 
 	// write content to `welcome.txt` file
-	err := ioutil.WriteFile(path, welcomeData, 0777)
+	err := os.WriteFile(path, welcomeData, 0777)
 
 	// log error
 	if err != nil {

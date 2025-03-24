@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func main() {
+func main_() {
 	ch1 := make(chan string, 1)
 
 	for i := 0; i < 10; i++ {
@@ -13,7 +13,10 @@ func main() {
 			ch1 = checkCapacity(ch1)
 		} else {
 			ch1 <- "Rajesh_" + strconv.Itoa(i)
+			fmt.Println(<-ch1)
+			ch1 <- "Rajesh_" + strconv.Itoa(i)
 		}
+
 		fmt.Println(<-ch1)
 	}
 

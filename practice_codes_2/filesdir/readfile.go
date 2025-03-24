@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
 const tmpDir1 = "/Users/rajesh/Desktop/tmpDir"
 
 func main_readfile() {
 	//location of html file
-	html, err := ioutil.ReadFile(tmpDir1 + "/page.html")
+	html, err := os.ReadFile(tmpDir1 + "/page.html")
 	if err != nil {
 		fmt.Printf("Error in reading file: %v", err.Error())
 	}

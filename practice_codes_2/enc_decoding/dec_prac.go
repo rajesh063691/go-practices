@@ -13,7 +13,7 @@ type Student struct {
 	HeightInMeters      float64
 }
 
-func main() {
+func main_unmarshal() {
 
 	// some JSON data
 	data := []byte(`
@@ -33,5 +33,5 @@ func main() {
 	fmt.Printf("Error: %v\n", json.Unmarshal(data, &john))
 
 	// print `john` struct
-	fmt.Printf("%#v\n", john)
+	fmt.Printf("%+v\n", john)
 }

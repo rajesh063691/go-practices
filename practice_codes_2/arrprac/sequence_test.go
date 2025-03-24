@@ -1,6 +1,7 @@
 package arrprac
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -8,11 +9,12 @@ func TestBracketSequence(t *testing.T) {
 	//valid := make([]byte, 5)
 	byteVal := []byte("()()(")
 	//valid = append(valid, byteVal)
-	_ = byteVal
+	//_ = byteVal
 
-	// _, res := BracketSequence(byteVal)
+	count := BracketSequence(byteVal)
+	fmt.Println("valid parantheseis count: ", count)
 
-	// if res != "valid sequence" {
+	// if count != "valid sequence" {
 	// 	t.Error("Invalid sequence passed")
 	// }
 

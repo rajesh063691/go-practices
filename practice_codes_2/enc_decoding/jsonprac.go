@@ -16,7 +16,7 @@ import (
 
 type Students map[string]interface{}
 
-func main1() {
+func main() {
 	// student := Students{
 	// 	FirstName: "Rajesh",
 	// 	lastName:  "Kumar",

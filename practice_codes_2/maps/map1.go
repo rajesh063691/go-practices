@@ -11,6 +11,8 @@ func main_1() {
 		"no": "Norway",
 	}
 
+	sort.countries()
+
 	fmt.Println(countries)
 
 	delete(countries, "ru")

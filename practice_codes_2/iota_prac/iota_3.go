@@ -11,7 +11,7 @@ const (
 	extraLarge
 )
 
-func main() {
+func main_3() {
 	var m SizeType = 0
 	m.toString()
 }

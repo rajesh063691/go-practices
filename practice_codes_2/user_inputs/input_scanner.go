@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func main_scanner() {
+func main_test() {
 	names := make([]string, 0)
 
 	scanner := bufio.NewScanner(os.Stdin)

@@ -5,6 +5,7 @@ import "fmt"
 type taxSystem interface {
 	calculateTax() int
 }
+
 type indianTax struct {
 	taxPercentage int
 	income        int

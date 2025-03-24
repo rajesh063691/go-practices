@@ -2,7 +2,7 @@ package calc_1
 
 import "errors"
 
-//returns sum of integers
+// returns sum of integers
 func Add(numbers ...int) (int, error) {
 	sum := 0
 	if len(numbers) < 2 {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func main_13() {
 	a := []int{5, 6}
 	val, err := checkAndGet(a, 2)
 	fmt.Printf("Val: %d\n", val)

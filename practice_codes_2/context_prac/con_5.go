@@ -11,7 +11,7 @@ func main_5() {
 
 	go performTask1(ctx)
 
-	time.Sleep(2 * time.Second)
+	time.Sleep(1 * time.Second)
 	cancel()
 
 	time.Sleep(1 * time.Second)

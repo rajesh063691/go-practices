@@ -2,16 +2,16 @@ package main
 
 import "fmt"
 
-func main_initial() {
+func main_initVal() {
 
 	//this default value is nil
 	//var vals []int
 
 	// this default value is [], means empty slice
 	vals := []int{}
-
-	if vals == nil {
-		fmt.Printf("slice is nil\n")
+	fmt.Println(vals)
+	if len(vals) == 0 {
+		fmt.Printf("slice is empty\n")
 	}
 
 	fmt.Printf("slice: %v; len: %d; cap: %d \n", vals, len(vals), cap(vals))

@@ -11,6 +11,6 @@ func subtract1(a int, b int) int {
 }
 
 func main_f2() {
-	fmt.Printf("Type of function add is			%T\n", add)
-	fmt.Printf("Type of function subtract is		%T\n", subtract)
+	fmt.Printf("Type of function add is			%T\n", add1)
+	fmt.Printf("Type of function subtract is		%T\n", subtract1)
 }

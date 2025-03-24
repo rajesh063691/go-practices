@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main_11() {
+func main() {
 
 	a := []string{"a", "b"}
 	checkAndPrint1(a, 2)
@@ -10,7 +10,7 @@ func main_11() {
 }
 
 func checkAndPrint1(a []string, index int) {
-	defer handleOutOfBounds()
+	defer handleOutOfBounds1()
 	if index > (len(a) - 1) {
 		panic("Out of bound access for slice")
 	}

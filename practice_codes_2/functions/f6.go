@@ -14,11 +14,12 @@ func dec(x int) int {
 
 func apply(x int, f func(int) int) int {
 	fmt.Printf("x=%d, funcName=%s, funcType=%T  \n", x, f, f)
+	//fmt.Printf("%s", "Hello")
 	r := f(x)
 	return r
 }
 
-func main_f6() {
+func main_3() {
 	r1 := apply(3, inc)
 	r2 := apply(2, dec)
 	fmt.Println(r1)

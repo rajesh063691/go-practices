@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
 // temprory directory
@@ -10,16 +10,18 @@ import (
 const tmpDir = "/Users/rajesh/Desktop/tmpDir"
 
 func main_readDir() {
-	files, _ := ioutil.ReadDir(tmpDir)
+	files, _ := os.ReadDir(tmpDir)
 	//fmt.Printf("Hello")
 	fmt.Println("<===Files Informations===>")
 	for _, file := range files {
-		fmt.Printf("Name: %v, Size:%v kv, Mode:%v, IsDir:%v ",
-			file.Name(),
-			file.Size(),
-			file.Mode(),
-			file.IsDir(),
-		)
+		// fmt.Printf("Name: %v, Size:%v kv, Mode:%v, IsDir:%v ",
+		// 	file.Name(),
+		// 	//file.Size(),
+		// 	//file.Mode(),
+		// 	file.IsDir(),
+		// )
+
+		_ = file
 
 		fmt.Println()
 	}

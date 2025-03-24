@@ -32,7 +32,7 @@ func main_filterSlice() {
 
 	fmt.Println("Struct with only Programmers and from Country Canada")
 	for _, programmer := range onlyProgrammers {
-		fmt.Println(programmer)
+		fmt.Printf("%+v\n", programmer)
 	}
 
 }

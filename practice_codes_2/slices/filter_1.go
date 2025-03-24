@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func main_filter1() {
 
 	vals := []int{-2, 0, 1, 9, 7, -3, -5, 6}
 
@@ -15,7 +15,7 @@ func main() {
 			n++
 		}
 	}
-
+	fmt.Println(vals)
 	vals = vals[:n]
 	fmt.Println(vals)
 }

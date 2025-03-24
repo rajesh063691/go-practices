@@ -67,7 +67,7 @@ func CommonInterface2(inter interface{}) {
 	}
 }
 
-func main() {
+func main_3() {
 	//0th case
 	// strArr:=make([]string,10)
 

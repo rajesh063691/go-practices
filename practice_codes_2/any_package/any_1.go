@@ -26,4 +26,6 @@ func main_1() {
 	fmt.Printf("City: %s\n", m["City"])
 	fmt.Printf("Country: %s\n", m["Country"])
 
+	fmt.Printf("%v \n", m)
+
 }

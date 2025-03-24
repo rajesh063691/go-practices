@@ -12,8 +12,9 @@ func main_sl() {
 	fmt.Println("<======Individual String Vals====>")
 	for _, sl := range words {
 		for _, str := range sl {
-			fmt.Println(str)
+			fmt.Printf(str + " ")
 		}
+		fmt.Println()
 	}
 
 	fmt.Printf("slice: %v; len: %d; cap: %d \n", words, len(words), cap(words))

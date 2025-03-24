@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main_pip3() {
+func main_3() {
 	fmt.Println(mirroredQuery())
 
 }

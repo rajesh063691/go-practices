@@ -1,30 +1,32 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func tic(str chan<- string) {
-	str <- "tic"
+func tic(tic chan<- string) {
+	//time.Sleep(1 * time.Second)
+	tic <- "tic tac"
+	close(tic)
+}
+
+func tac(str chan<- string, str2 <-chan string) {
+	value := <-str2
+	str <- value
 	close(str)
 }
 
-func tac(str <-chan string) string {
-	return <-str
-	//close(str)
-}
+func main_t() {
 
-func main_tic() {
-
-	ch1 := make(chan<- string)
-	ch2 := make(<-chan string)
+	sendTo := make(chan string, 1)
+	receiveFrom := make(chan string, 1)
 	//i := 0
 	//for i <= 10 {
-	go tic(ch1)
-	go tac(ch2)
+	go tic(sendTo)
+	go tac(sendTo, receiveFrom)
 	//}
 
-	for str := range ch2 {
+	//fmt.Println(<-sendTo)
+
+	for str := range sendTo {
 		fmt.Println(str)
 	}
 
