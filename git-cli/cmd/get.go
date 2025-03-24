@@ -80,9 +80,13 @@ func getRepoDetails(pat string) {
 		fmt.Printf("Error in unmarshalling the response :: %s", err.Error())
 		return
 	}
-
-	for _, repoDetails := range result {
+	for i, repoDetails := range result {
 		repo := repoDetails.(map[string]interface{})
-		fmt.Println(" name : ", repo["name"], " private :", repo["private"], "clone_url :", repo["clone_url"])
+		// fmt.Println(" name : ", repo["name"], " private :", repo["private"], "clone_url :", repo["clone_url"])
+
+		fmt.Printf("Repo No :: %d \n and Repo Details :: %v \n", i+1, repo)
+		fmt.Println("---------------------------------------------------")
 	}
+
+	fmt.Println("Total Repositories :: ", len(result))
 }

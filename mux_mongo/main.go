@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"log"
 	"mux_mongo/usecase"
 	"net/http"
 	"os"
+
+	_ "net/http/pprof"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -60,7 +63,20 @@ func main() {
 	r.HandleFunc("/v1/employee", service.DeleteAll).Methods(http.MethodDelete)
 
 	log.Println("Server is running on port 4444")
-	err := http.ListenAndServe(":4444", r)
+	// one way
+	// err := http.ListenAndServe(":4444", r)
+	// if err != nil {
+	// 	log.Fatalf("error in starting the server: %v", err)
+	// }
+
+	// 2nd way
+	server := &http.Server{
+		Addr:      ":4444",
+		TLSConfig: &tls.Config{},
+		Handler:   r,
+	}
+
+	err := server.ListenAndServe()
 	if err != nil {
 		log.Fatalf("error in starting the server: %v", err)
 	}

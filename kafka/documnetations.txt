@@ -1,0 +1,2 @@
+segmentio -> https://github.com/segmentio/kafka-go
+kafka video -> https://www.youtube.com/watch?v=3_pb1spnmDo
