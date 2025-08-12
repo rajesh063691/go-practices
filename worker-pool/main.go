@@ -56,6 +56,7 @@ func (wp *WorkerPool) Wait() {
 	wp.wg.Wait()
 }
 
+// commenting for better readability
 func main() {
 	// Create a worker pool with 3 workers and a job queue of size 10
 	pool := NewWorkerPool(3, 10)
